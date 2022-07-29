@@ -322,6 +322,20 @@ function focusMenuInputAfterTransition(e) {
   }
 }
 
+function focusInputAfterWindowRecover(window) {
+  const drawer = qa('.toggle-content');
+
+  if (window.isFocused) {
+    drawer.forEach((el) => {
+      if (!el.classList.contains('hide')) {
+        el.querySelector('.input-control').focus();
+      }
+    });
+  } else {
+    console.log('Window focus lost...');
+  }
+}
+
 function handleModalClose() {
   document.addEventListener('click', (e) => {
     if (
@@ -487,10 +501,10 @@ function getAppIcon(app = {}) {
   }
 }
 
-function clearSearch() {
-  searchInputObs.next('');
-  q('#app-search').value = '';
-}
+// function clearSearch() {
+//   searchInputObs.next('');
+//   q('#app-search').value = '';
+// }
 
 function escapeHtml(unsafe) {
   return unsafe
@@ -543,9 +557,10 @@ export {
   handleNotificationClick,
   handleModalClose,
   handleMouseHover,
+  focusInputAfterWindowRecover,
   windowMargin,
   startTutorial,
-  clearSearch,
+  // clearSearch,
   escapeHtml,
   getAppIcon,
   openDrawer,

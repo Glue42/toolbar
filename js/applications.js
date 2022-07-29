@@ -5,7 +5,8 @@ import {
   removeFavoriteApp,
 } from './favorites.js';
 import { getSetting, getSettings } from './settings.js';
-import { clearSearch, getAppIcon } from './utils.js';
+// import { clearSearch, getAppIcon } from './utils.js';
+import { getAppIcon } from './utils.js';
 import { changeFolderState, isFolderOpened } from './folders.js';
 
 const searchInputObs = new rxjs.BehaviorSubject('');
@@ -127,9 +128,9 @@ function handleAppClick() {
       }
     } else if (e.target.matches('[app-name], [app-name] *')) {
       startApp(appName);
-      if (!e.ctrlKey) {
-        clearSearch();
-      }
+      // if (!e.ctrlKey) {
+      //   clearSearch();
+      // }
     } else if (e.target.matches('[folder-name], [folder-name] *')) {
       let folderElement = e.path.find((e) => e.getAttribute('folder-name'));
       let folderName = folderElement.getAttribute('folder-name');

@@ -1,7 +1,8 @@
 import { gssPromise, getCurrentEntityTypes } from './gss.js';
 import { allApplicationsObs } from './applications.js';
 import { startApp, allWorkspacesObs, openWorkspace } from './glue-related.js';
-import { clearSearch, getAppIcon } from './utils.js';
+// import { clearSearch, getAppIcon } from './utils.js';
+import { getAppIcon } from './utils.js';
 
 let gss;
 let clientAppsObs = new rxjs.BehaviorSubject([]);
@@ -90,9 +91,9 @@ function handleClientAndInstrumentClicks() {
         clientId,
       });
 
-      if (!e.ctrlKey) {
-        clearSearch();
-      }
+      // if (!e.ctrlKey) {
+      //   clearSearch();
+      // }
     }
 
     if (e.target.matches('[instrument-app-id], [instrument-app-id] *')) {
@@ -105,9 +106,9 @@ function handleClientAndInstrumentClicks() {
 
       startApp(appId, { ric: insturmentId });
 
-      if (!e.ctrlKey) {
-        clearSearch();
-      }
+      // if (!e.ctrlKey) {
+      //   clearSearch();
+      // }
     }
 
     if (e.target.matches('[workspace-id], [workspace-id] *')) {
@@ -134,9 +135,9 @@ function handleClientAndInstrumentClicks() {
         openWorkspace(workspaceId, workspaceType, { ric: instrumentId });
       }
 
-      if (!e.ctrlKey) {
-        clearSearch();
-      }
+      // if (!e.ctrlKey) {
+      //   clearSearch();
+      // }
     }
   });
 }

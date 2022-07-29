@@ -59,13 +59,15 @@ async function checkWindowSize() {
   let win = glue.windows.my();
   let currentBounds = win.bounds;
   if (currentBounds.width !== 940 || currentBounds.height !== 800) {
-    console.debug('Start bounds are wrong, correcting to 940x800')
-    win.moveResize({width: 940, height: 800});
+    console.debug('Start bounds are wrong, correcting to 940x800');
+    win.moveResize({ width: 940, height: 800 });
   }
   win.onBoundsChanged(() => {
     if (win.bounds.width !== 940 || win.bounds.height !== 800) {
-      console.debug(`Resizing to incorrect bounds for width: ${win.bounds.width} and height: ${win.bounds.height}, correcting to 940x800`)
-      win.moveResize({width: 940, height: 800});
+      console.debug(
+        `Resizing to incorrect bounds for width: ${win.bounds.width} and height: ${win.bounds.height}, correcting to 940x800`
+      );
+      win.moveResize({ width: 940, height: 800 });
     }
   });
 }
@@ -194,6 +196,11 @@ async function focusApp(appName) {
   await gluePromise;
   let app = glue.appManager.application(appName);
   app.instances.forEach((i) => i.activate());
+}
+
+async function focusWindow(callback) {
+  await gluePromise;
+  glue.windows.my().onFocusChanged(callback);
 }
 
 async function refreshApps() {
@@ -424,9 +431,9 @@ async function getPrefs() {
   await gluePromise;
   const prefs = await glue.prefs.get();
   setSettings(prefs.data);
-  glue.prefs.subscribe(prefs => {
+  glue.prefs.subscribe((prefs) => {
     updateSettings(prefs.data);
-  })
+  });
 }
 
 async function updatePrefs(setting) {
@@ -447,6 +454,7 @@ export {
   boundsObs,
   startApp,
   focusApp,
+  focusWindow,
   getApp,
   refreshApps,
   notificationsCountObs,
